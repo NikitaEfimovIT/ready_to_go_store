@@ -57,6 +57,7 @@ class HomePage extends StatelessWidget {
 
   Widget buildProductsList(List<Product> posts) {
     return GridView.builder(
+      cacheExtent: 9999,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, // Number of items per row
         crossAxisSpacing: 5, // Horizontal spacing between items
