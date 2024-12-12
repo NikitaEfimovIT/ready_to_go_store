@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'package:ready_to_go_store/models/Product.dart';
 import 'package:ready_to_go_store/models/app_state.dart';
@@ -15,41 +16,59 @@ class HomePage extends StatelessWidget {
     return Consumer<AppState>(builder: (context, state, child) =>
         Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.white,
             title: const TopBar(),
+            scrolledUnderElevation:0,
           ),
-          body: FutureBuilder<List<Product>>(
-            future: state.products,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasData) {
-                final products = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // "Deals for You" Text
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Deals for You",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
+          // body: FutureBuilder<List<Product>>(
+          //   future: state.products,
+          //   builder: (context, snapshot) {
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return const Center(child: CircularProgressIndicator());
+          //     } else if (snapshot.hasData) {
+          //       final products = snapshot.data!;
+          //       return Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           // "Deals for You" Text
+          //           const Padding(
+          //             padding: EdgeInsets.all(8.0),
+          //             child: Text(
+          //               "Deals for You",
+          //               style: TextStyle(
+          //                 fontSize: 20,
+          //                 fontWeight: FontWeight.bold,
+          //                 color: Colors.black,
+          //               ),
+          //             ),
+          //           ),
+          //           // Product Grid
+          //           Expanded(
+          //             child: buildProductsList(products),
+          //           ),
+          //         ],
+          //       );
+          //     } else {
+          //       return const Center(child: Text("No data available"));
+          //     }
+          //   },
+          // ),
+          body: RefreshIndicator(
+            onRefresh: () async => state.pagingController.refresh(),
+            child: PagedListView<int, Product>.separated(
+              pagingController: state.pagingController,
+              builderDelegate: PagedChildBuilderDelegate(
+                animateTransitions: true,
+                itemBuilder: (context, product, index) => ProductCard(
+                  title: product.title,
+                  imageUrl: product.img,
+                  price: product.price,
+                  description: 'test-description',
+                  onAddToCart: () {},
                     ),
-                    // Product Grid
-                    Expanded(
-                      child: buildProductsList(products),
-                    ),
-                  ],
-                );
-              } else {
-                print(snapshot);
-                return const Center(child: Text("No data available"));
-              }
-            },
+              ),
+              separatorBuilder: (context, index) => const Divider(),
+            ),
           ),
         )
     );
