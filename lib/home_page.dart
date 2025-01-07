@@ -5,6 +5,7 @@ import 'package:ready_to_go_store/models/Product.dart';
 import 'package:ready_to_go_store/models/app_state.dart';
 import 'package:ready_to_go_store/regular_top_bar/top_bar.dart';
 
+import 'detailed_product_view/detailed_product_view.dart';
 import 'home_page_components/product_card/product_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,7 +16,10 @@ class HomePage extends StatelessWidget {
     return Consumer<AppState>(builder: (context, state, child) =>
         Scaffold(
           appBar: AppBar(
-            title: const TopBar(),
+              titleSpacing: 8,
+              backgroundColor: Colors.white,
+              scrolledUnderElevation: 0,
+              title: const TopBar(),
           ),
           body: FutureBuilder<List<Product>>(
             future: state.products,
@@ -27,9 +31,15 @@ class HomePage extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Enter your username',
+                      ),
+                    ),
                     // "Deals for You" Text
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         "Deals for You",
                         style: TextStyle(
@@ -72,7 +82,7 @@ class HomePage extends StatelessWidget {
           imageUrl: product.img,
           price: product.price,
           description: 'test-description',
-          onAddToCart: () {},
+          onAddToCart: () {showProductDetail(context, product.title);},
         );
       },
     );
