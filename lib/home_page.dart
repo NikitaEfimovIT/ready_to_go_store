@@ -7,72 +7,53 @@ import 'package:ready_to_go_store/models/app_state.dart';
 import 'package:ready_to_go_store/regular_top_bar/top_bar.dart';
 
 import 'home_page_components/product_card/product_card.dart';
+import 'home_page_components/product_card/product_detailed_modal_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppState>(builder: (context, state, child) =>
-        Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            title: const TopBar(),
-            scrolledUnderElevation:0,
-          ),
-          // body: FutureBuilder<List<Product>>(
-          //   future: state.products,
-          //   builder: (context, snapshot) {
-          //     if (snapshot.connectionState == ConnectionState.waiting) {
-          //       return const Center(child: CircularProgressIndicator());
-          //     } else if (snapshot.hasData) {
-          //       final products = snapshot.data!;
-          //       return Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           // "Deals for You" Text
-          //           const Padding(
-          //             padding: EdgeInsets.all(8.0),
-          //             child: Text(
-          //               "Deals for You",
-          //               style: TextStyle(
-          //                 fontSize: 20,
-          //                 fontWeight: FontWeight.bold,
-          //                 color: Colors.black,
-          //               ),
-          //             ),
-          //           ),
-          //           // Product Grid
-          //           Expanded(
-          //             child: buildProductsList(products),
-          //           ),
-          //         ],
-          //       );
-          //     } else {
-          //       return const Center(child: Text("No data available"));
-          //     }
-          //   },
-          // ),
-          body: RefreshIndicator(
-            onRefresh: () async => state.pagingController.refresh(),
-            child: PagedListView<int, Product>.separated(
-              pagingController: state.pagingController,
-              builderDelegate: PagedChildBuilderDelegate(
-                animateTransitions: true,
-                itemBuilder: (context, product, index) => ProductCard(
+    return Consumer<AppState>(
+      builder: (context, state, child) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: const TopBar(),
+          scrolledUnderElevation: 0,
+        ),
+        body: RefreshIndicator(
+          onRefresh: () async => state.pagingController.refresh(),
+          child: PagedGridView<int, Product>(
+            cacheExtent: 9999,
+            pagingController: state.pagingController,
+            builderDelegate: PagedChildBuilderDelegate<Product>(
+              animateTransitions: true,
+              itemBuilder: (context, product, index) => GestureDetector(
+                onTap: () {
+                  showProductModal(context, product); // Call the modal function
+                },
+                child: ProductCard(
                   title: product.title,
                   imageUrl: product.img,
                   price: product.price,
                   description: 'test-description',
                   onAddToCart: () {},
-                    ),
+                ),
               ),
-              separatorBuilder: (context, index) => const Divider(),
+            ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
+              childAspectRatio: 0.7,
             ),
           ),
-        )
+        ),
+      ),
     );
   }
+
+
 
   Widget buildProductsList(List<Product> posts) {
     return GridView.builder(
