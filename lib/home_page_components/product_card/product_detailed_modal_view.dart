@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../models/Product.dart'; // Import your Product model if needed
+import 'package:provider/provider.dart';
+import '../../cart_provider.dart';
+import '../../models/Product.dart';
 
 void showProductModal(BuildContext context, Product product) {
   showModalBottomSheet(
@@ -38,7 +40,15 @@ void showProductModal(BuildContext context, Product product) {
                 ),
                 const SizedBox(height: 10),
                  ElevatedButton(
-                   onPressed: () {  },
+                   onPressed: () {
+                     Provider.of<CartProvider>(context, listen: false).addItem(
+                     product.id,
+                     product.title,
+                     product.price.toDouble(),
+                   );
+                   ScaffoldMessenger.of(context).showSnackBar(
+                     SnackBar(content: Text("${product.title} added to cart")),
+                   );  },
                    child: Text("Add to Cart"),
                 ),
               ],

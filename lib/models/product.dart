@@ -25,7 +25,7 @@ class Product {
       id: json['id'].toString(),
       title: json['title'],
       description: json['description'],
-      price: Price(Currency.euro, json['price']),
+      price: Price(Currency.euro, json['price'], json['price']),
       img: json['images'][0],
       createdAt: DateTime.parse(json["meta"]['createdAt']),
       updatedAt: DateTime.parse(json["meta"]['updatedAt']),
