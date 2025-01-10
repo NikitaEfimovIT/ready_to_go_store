@@ -15,8 +15,20 @@ class AppState extends ChangeNotifier {
 
   static const _pageSize = 20;
 
+  String? _searchQuery;
+
+  late final Future<List<String>> _categories;
+  Future<List<String>> get categories => _categories;
+
+
+  List<String> selectedCategories = [];
+
   final PagingController<int, Product> pagingController = PagingController(firstPageKey: 0);
 
+  void setSearchQuery(String newQuery){
+    _searchQuery = newQuery.trim().isEmpty ? null : newQuery.trim();
+    pagingController.refresh();
+  }
 
   Future<void> _fetchPage(int pageKey) async {
     try {
@@ -34,9 +46,22 @@ class AppState extends ChangeNotifier {
   }
 
   Future<List<Product>> getProductsFromTheServer(num pageNum) async {
-    print("getProd"+pageNum.toString());
-    final response = await http
-        .get(Uri.parse('https://dummyjson.com/products?skip=${pageNum}&limit=${_pageSize}'));
+    http.Response response;
+    if(_searchQuery==null) {
+      response = await http
+          .get(Uri.parse(
+          'https://dummyjson.com/products?skip=$pageNum&limit=$_pageSize'));
+    }
+    else if(selectedCategories.isNotEmpty){
+      response = await http
+          .get(Uri.parse(
+          'https://dummyjson.com/products/category/${selectedCategories[0]}'));
+    }
+    else{
+      response = await http
+          .get(Uri.parse(
+          'https://dummyjson.com/products/search?q=$_searchQuery'));
+    }
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
@@ -48,11 +73,30 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  Future<List<String>> getAllCategories() async{
+    var response = await http.get(Uri.parse('https://dummyjson.com/products/category-list'));
+
+
+    if (response.statusCode == 200) {
+      List<String> body = List<String>.from(json.decode(response.body));
+      return body.toList();
+    } else {
+
+      throw Exception('Failed to load products');
+    }
+  }
+
+  void updateSelectedCategories(List<String>newCategories){
+    selectedCategories = newCategories;
+    pagingController.refresh();
+
+  }
 
   AppState(){
     // _products = getProductsFromTheServer(1);
     pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
+    _categories = getAllCategories();
   }
 }

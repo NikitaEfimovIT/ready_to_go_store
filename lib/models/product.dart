@@ -8,6 +8,7 @@ class Product {
   final String title;
   final String description;
   final Price price;
+  final String category;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -17,6 +18,7 @@ class Product {
       required this.title,
       required this.description,
       required this.price,
+        required this.category,
       required this.createdAt,
       required this.updatedAt});
 
@@ -26,6 +28,7 @@ class Product {
       title: json['title'],
       description: json['description'],
       price: Price(Currency.euro, json['price'], json['price']),
+      category: json["category"],
       img: json['images'][0],
       createdAt: DateTime.parse(json["meta"]['createdAt']),
       updatedAt: DateTime.parse(json["meta"]['updatedAt']),
