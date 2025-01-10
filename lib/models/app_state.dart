@@ -20,7 +20,6 @@ class AppState extends ChangeNotifier {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      print("TRYRYRYRRYRYR");
       final newItems = await getProductsFromTheServer(pageKey);
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
@@ -30,7 +29,6 @@ class AppState extends ChangeNotifier {
         pagingController.appendPage(newItems, nextPageKey);
       }
     } catch (error) {
-      print("error"+error.toString());
       pagingController.error = error;
     }
   }
