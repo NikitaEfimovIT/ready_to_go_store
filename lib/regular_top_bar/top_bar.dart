@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../cart.dart';
+
 class TopBar extends StatelessWidget {
   const TopBar({super.key});
 
@@ -17,9 +19,14 @@ class TopBar extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                  onPressed: () {},
-                  icon: Image.asset("lib/assets/cart.png",
-                      width: 30, height: 30)),
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CartScreen()),
+                  );
+                },
+              ),
               IconButton(
                   onPressed: () {},
                   icon: Image.asset("lib/assets/profile.png",

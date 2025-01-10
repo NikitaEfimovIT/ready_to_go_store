@@ -3,11 +3,18 @@ import 'package:provider/provider.dart';
 import 'package:ready_to_go_store/home_page.dart';
 import 'package:ready_to_go_store/models/app_state.dart';
 
+import 'cart_provider.dart';
+
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => AppState(),
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AppState()),
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
