@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
+import 'package:ready_to_go_store/home_page_components/filters/filters_component.dart';
+import 'package:ready_to_go_store/home_page_components/search_bar/search_bar_component.dart';
 import 'package:ready_to_go_store/models/Product.dart';
 import 'package:ready_to_go_store/models/app_state.dart';
 import 'package:ready_to_go_store/regular_top_bar/top_bar.dart';
@@ -17,8 +19,11 @@ class HomePage extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, state, child) => Scaffold(
         appBar: AppBar(
+          toolbarHeight: 200,
           backgroundColor: Colors.white,
-          title: const TopBar(),
+          title: const Padding(
+              padding: EdgeInsets.only(left: 2, right: 2),
+              child: Column(children: [TopBar(), SearchBarComponent(), FilterComponents()])),
           scrolledUnderElevation: 0,
         ),
         body: RefreshIndicator(
@@ -52,8 +57,6 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
-
 
   Widget buildProductsList(List<Product> posts) {
     return GridView.builder(

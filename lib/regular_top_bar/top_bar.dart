@@ -8,14 +8,12 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 26, right: 26),
-      child: Row(
+    return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // SvgPicture.asset("lib/assets/logo.svg",height: 37,
           //   width: 180, ),
-          Image.asset("lib/assets/logo.png", width: 180, height: 37),
+          Image.asset("lib/assets/logo.png", width: 200, height: 37),
           Row(
             children: [
               IconButton(
@@ -34,7 +32,6 @@ class TopBar extends StatelessWidget {
             ],
           )
         ],
-      ),
-    );
+      );
   }
 }
