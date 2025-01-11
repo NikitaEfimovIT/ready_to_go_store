@@ -1,25 +1,46 @@
 import 'package:flutter/material.dart';
-import 'models/cart.dart';
+import 'package:ready_to_go_store/models/item.dart';
+import 'package:ready_to_go_store/models/order.dart';
+
+import 'models/price.dart';
 
 class CartProvider with ChangeNotifier {
-  final Cart _cart = Cart();
+  final Order _order = Order([]);
 
-  Map<String, CartItem> get items => _cart.items;
+  List<Item> get items => _order.orderItems;
 
-  double get totalAmount => _cart.totalAmount;
+  num get totalAmount => _order.totalAmount;
 
-  void addItem(String productId, String title, double price) {
-    _cart.addItem(productId, title, price);
+  Price get totalPrice => _order.totalPrice;
+
+  void addItem(Item newItem) {
+    _order.addNewProduct(newItem);
+    notifyListeners();
+  }
+
+  void changeAmount(String id, num newAmount){
+    if (newAmount > 0) {
+      for (var el in _order.orderItems) {
+        if (el.productId == id) {
+          el.amount = newAmount;
+        }
+      }
+    } else {
+      _order.removeProduct(id);
+    }
+
+    _order.calculateTotalAmount();
+    _order.calculateTotalPrice();
     notifyListeners();
   }
 
   void removeItem(String productId) {
-    _cart.removeItem(productId);
+    _order.removeProduct(productId);
     notifyListeners();
   }
 
   void clearCart() {
-    _cart.clearCart();
+    _order.clearOrder();
     notifyListeners();
   }
 }
