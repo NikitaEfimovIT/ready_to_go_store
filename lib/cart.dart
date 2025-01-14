@@ -27,7 +27,7 @@ class _CartState extends State<Cart> {
               child: TopBar()),
           scrolledUnderElevation: 0,
         ),
-        body: Padding( padding: const EdgeInsets.all(26), child: Column(
+        body: Padding( padding: const EdgeInsets.only(top:26, bottom: 26, right:10, left:10), child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

@@ -21,13 +21,13 @@ class CartItem extends StatelessWidget {
           )]
       ),
       height: 100,
-      width: 356,
+      width: 340,
       child: Card(
         color: const Color.fromARGB(255, 255, 255, 255),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.network(item.productIcon),
+            Image.network(item.productIcon, height: 50),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
