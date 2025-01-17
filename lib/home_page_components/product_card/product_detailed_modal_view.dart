@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ready_to_go_store/models/item.dart';
 import '../../cart_provider.dart';
 import '../../models/Product.dart';
 
@@ -41,10 +42,7 @@ void showProductModal(BuildContext context, Product product) {
                 const SizedBox(height: 10),
                  ElevatedButton(
                    onPressed: () {
-                     Provider.of<CartProvider>(context, listen: false).addItem(
-                     product.id,
-                     product.title,
-                     product.price.toDouble(),
+                     Provider.of<CartProvider>(context, listen: false).addItem(Item(product.id, product.img, product.title, product.price)
                    );
                    ScaffoldMessenger.of(context).showSnackBar(
                      SnackBar(content: Text("${product.title} added to cart")),

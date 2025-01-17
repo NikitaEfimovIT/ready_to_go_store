@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/price.dart';
 
-
 class ProductCard extends StatelessWidget {
   final String imageUrl;
   final String title;
@@ -29,13 +28,19 @@ class ProductCard extends StatelessWidget {
         children: [
           // Product Image
           ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(3)),
-            child: Image.network(
-              imageUrl,
-              height: 142,
-              width: double.infinity,
-              fit: BoxFit.contain,
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(3)),
+            // child: Image.network(
+            //   imageUrl,
+            //   height: 142,
+            //   width: double.infinity,
+            //   fit: BoxFit.contain,
+            // ),
+            child: FadeInImage.assetNetwork(
+                placeholder: 'lib/assets/loading.gif',
+                image: imageUrl,
+                height: 142,
+                width: double.infinity,
+                fit: BoxFit.contain),
           ),
           Padding(
             padding: const EdgeInsets.all(0.0),
@@ -55,10 +60,9 @@ class ProductCard extends StatelessWidget {
                 Text(
                   '\$${price.toStringAsFixed(2)}',
                   style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[600],
-                    fontWeight: FontWeight.w300
-                  ),
+                      fontSize: 12,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.w300),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

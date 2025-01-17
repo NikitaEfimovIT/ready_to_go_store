@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ready_to_go_store/cart_provider.dart';
 
 import '../cart.dart';
 
@@ -8,7 +10,12 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+
+    return Consumer<CartProvider>(
+
+        builder: (BuildContext context, CartProvider value, Widget? child) {
+
+        return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // SvgPicture.asset("lib/assets/logo.svg",height: 37,
@@ -17,11 +24,14 @@ class TopBar extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                icon: Icon(Icons.shopping_cart),
+                icon: value.totalAmount>0 ? Badge.count(
+                  count: value.totalAmount.toInt(),
+                  child: const Icon(Icons.shopping_cart),
+                ) : const Icon(Icons.shopping_cart),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CartScreen()),
+                    MaterialPageRoute(builder: (context) => Cart()),
                   );
                 },
               ),
@@ -31,7 +41,7 @@ class TopBar extends StatelessWidget {
                       width: 30, height: 30))
             ],
           )
-        ],
-      );
+        ]);
+      });
   }
 }
