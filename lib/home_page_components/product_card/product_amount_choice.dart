@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProductAmountChoice extends StatefulWidget {
+  final ValueChanged<int> onAmountChanged;
+  ProductAmountChoice({required this.onAmountChanged});
+
   @override
   _ProductAmountChoiceState createState() => _ProductAmountChoiceState();
 }
@@ -19,6 +22,7 @@ class _ProductAmountChoiceState extends State<ProductAmountChoice> {
             setState(() {
               if (_productCount > 1) _productCount--;
             });
+            widget.onAmountChanged(_productCount);
           },
         ),
         Text(
@@ -31,6 +35,7 @@ class _ProductAmountChoiceState extends State<ProductAmountChoice> {
             setState(() {
               if (_productCount < 10) _productCount++;
             });
+            widget.onAmountChanged(_productCount);
           },
         ),
       ],

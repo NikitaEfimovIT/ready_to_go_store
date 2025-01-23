@@ -18,6 +18,16 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  retrieveItemAmount(String id) {
+    for (var el in _order.orderItems) {
+      if (el.productId == id) {
+        return el.amount - 1;
+      }
+    }
+    return 0;
+  }
+
+
   void changeAmount(String id, num newAmount){
     if (newAmount > 0) {
       for (var el in _order.orderItems) {
