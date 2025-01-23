@@ -12,7 +12,6 @@ void showProductModal(BuildContext context, Product product) {
     isScrollControlled: true,
     builder: (BuildContext context) {
       return FractionallySizedBox(
-        heightFactor: 0.8,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -127,6 +126,7 @@ void showProductModal(BuildContext context, Product product) {
                           padding: EdgeInsets.symmetric(horizontal: 35, vertical: 12),
                         ),
                         onPressed: () {
+                          Navigator.of(context).pop(); // Close the BottomSheet
                           Provider.of<CartProvider>(context, listen: false).addItem(
                             Item(product.id, product.img, product.title, product.price),
                           );
@@ -150,6 +150,7 @@ void showProductModal(BuildContext context, Product product) {
                           padding: EdgeInsets.symmetric(horizontal: 35, vertical: 12),
                         ),
                         onPressed: () {
+                          Navigator.of(context).pop(); // Close the BottomSheet
                           Provider.of<CartProvider>(context, listen: false).addItem(
                             Item(product.id, product.img, product.title, product.price),
                           );
@@ -163,11 +164,9 @@ void showProductModal(BuildContext context, Product product) {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 100)
                   ],
                 )
-
-
-
               ],
             ),
           ),
