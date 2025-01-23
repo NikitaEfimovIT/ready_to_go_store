@@ -163,10 +163,10 @@ void showProductModal(BuildContext context, Product product) {
                               Provider.of<CartProvider>(context, listen: false)
                                   .changeAmount(product.id, itemExistingAMount + selectedAmount);
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("${product.title} added to cart" + itemExistingAMount.toString())),
+                                SnackBar(content: Text("${product.title} added to cart" )),
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               "Add to Cart",
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 73, 8, 1),
