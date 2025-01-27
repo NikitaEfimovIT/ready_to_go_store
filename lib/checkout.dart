@@ -3,6 +3,7 @@ import 'package:ready_to_go_store/regular_top_bar/top_bar.dart';
 import 'checkout_components/payer_form.dart';
 import 'checkout_components/payment_option.dart';
 import 'models/transaction.dart';
+import 'order_collection_screen.dart';
 
 class Checkout extends StatefulWidget {
   const Checkout({super.key});
@@ -59,7 +60,7 @@ class _CheckoutState extends State<Checkout> {
                           backgroundColor:
                               const Color.fromARGB(255, 255, 73, 8),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => OrderCollectionScreen())),
                         child: const Text("Make a payment",
                             style: TextStyle(
                               color: Colors.white,
