@@ -27,6 +27,7 @@ void showProductModal(BuildContext context, Product product) {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.network(
                           product.img,
@@ -87,6 +88,10 @@ void showProductModal(BuildContext context, Product product) {
                       ],
                     ),
                     const SizedBox(height: 16),
+                    Row(children: [
+                      Flexible(child: Text(product.description))
+                    ],),
+                    const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -98,7 +103,8 @@ void showProductModal(BuildContext context, Product product) {
                                 "Available in:",
                                 style: TextStyle(
                                   color: Color.fromRGBO(0, 0, 0, 1),
-                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
                                 ),
                                 softWrap: true,
                                 overflow: TextOverflow.visible,
@@ -107,7 +113,7 @@ void showProductModal(BuildContext context, Product product) {
                                 "a: 2, b: 5, c: 7",
                                 style: TextStyle(
                                   color: Color.fromRGBO(0, 0, 0, 1),
-                                  fontSize: 12,
+                                  fontSize: 14,
                                 ),
                                 softWrap: true,
                                 overflow: TextOverflow.visible,
@@ -137,6 +143,7 @@ void showProductModal(BuildContext context, Product product) {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
+                              shadowColor: Colors.transparent,
                               side: BorderSide(
                                   color: Color.fromRGBO(255, 73, 8, 1), width: 1),
                               shape: RoundedRectangleBorder(
@@ -179,7 +186,7 @@ void showProductModal(BuildContext context, Product product) {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color.fromRGBO(255, 73, 8, 1),
-                              side: BorderSide(color: Colors.white, width: 1),
+                              shadowColor: Colors.transparent,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8)),
                               padding: EdgeInsets.symmetric(

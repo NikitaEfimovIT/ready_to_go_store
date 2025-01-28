@@ -23,15 +23,19 @@ class Product {
       required this.updatedAt});
 
   factory Product.fromJson(Map<String, dynamic> json) {
+    print(json);
     return Product(
       id: json['id'].toString(),
-      title: json['title'],
+      title: json['name'],
       description: json['description'],
-      price: Price(Currency.euro, json['price']),
-      category: json["category"],
-      img: json['images'][0],
-      createdAt: DateTime.parse(json["meta"]['createdAt']),
-      updatedAt: DateTime.parse(json["meta"]['updatedAt']),
+      // price: Price(Currency.euro, json['price']),
+      price: Price(Currency.euro, 0),
+      // category: json["category"],
+      category: "",
+      // img: json['images'][0],
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png",
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
     );
   }
 }
