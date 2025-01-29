@@ -64,7 +64,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
   Widget build(BuildContext context) {
     return Text(
       _formatTimeInWords(),
-      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red),
+      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red),
     );
   }
 }
@@ -90,16 +90,16 @@ class OrderCollectionScreen extends StatelessWidget {
                     const Text(
                       style: TextStyle(
                           color: Color.fromARGB(255, 255, 73, 8),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 30),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 26),
                       "Take Your Items!",
                     ),
                     SizedBox(height: 10),
                     const Text(
                       "Go to the locker and scan this code to get your order",
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300,
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -111,7 +111,7 @@ class OrderCollectionScreen extends StatelessWidget {
                         QrImageView(
                           data: '1234567890',
                           version: QrVersions.auto,
-                          size: 300.0,
+                          size: 280.0,
                         ),
                       ],
                     ),
@@ -121,58 +121,74 @@ class OrderCollectionScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Remaining Time: ",
+                          "Valid: ",
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.w200),
                         ),
                         CountdownTimer(),
                       ],
                     ),
                     SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    const Padding(padding: EdgeInsets.only(left:20, right: 20),
+                      child:
+                      Text("*When you pick up your order, you will automatically redirected to the home page",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16,
+                      ),),),
+                    SizedBox(height: 20),
+
+                    Padding(  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(
-                                255, 255, 73, 8),
+                            backgroundColor: const Color.fromARGB(255, 255, 73, 8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5), // Set border radius to 5px
+                            ),
                           ),
-                          onPressed: () =>
-                          {
+                          onPressed: () {
                             showModalBottomSheet(
                               backgroundColor: Colors.white,
                               context: context,
                               isScrollControlled: true,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(2)),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(top: Radius.circular(2)),
                               ),
                               builder: (BuildContext context) {
                                 return Container(
-                                  height: MediaQuery.of(context).copyWith().size.height * 0.4,
-                                  child: Column(children: [
-                                    Row(
+                                  height: MediaQuery.of(context).size.height * 0.4,
+                                  child: Column(
+                                    children: [
+                                      Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                      Text("Order Overview"),
-                                      IconButton(
-                                        icon: Icon(Icons.close), // Cross icon
-                                        onPressed: () {
-                                          Navigator.pop(context); // Pop the current screen off the stack
-                                        },
+                                        children: [
+                                          const Text(
+                                            "Order Overview",
+                                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                                          ),
+                                          IconButton(
+                                            icon: const Icon(Icons.close),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
                                       ),
-                                    ],),
-                                    OrderOverviewItemsList()
-                                ],),);
-
+                                      OrderOverviewItemsList(),
+                                    ],
+                                  ),
+                                );
                               },
-                            )
+                            );
                           },
                           child: const Text(
                             "Order Review",
                             style: TextStyle(
                               color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
                             ),
                           ),
                         ),
