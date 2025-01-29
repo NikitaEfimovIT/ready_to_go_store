@@ -19,6 +19,7 @@ class HomePage extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, state, child) => Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           toolbarHeight: 200,
           backgroundColor: Colors.white,
           title: const Padding(

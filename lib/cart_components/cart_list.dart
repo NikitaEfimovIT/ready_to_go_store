@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'cart_item.dart';
 
 import '../models/item.dart';
+import 'cart_item_v2.dart';
 
 class CartList extends StatelessWidget {
   final List<Item> items;
@@ -20,7 +21,7 @@ class CartList extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (context, index) {
                 final Item item = items[index];
-                return CartItem(changeAmount: changeAmount, item: item);
+                return CartItemNew(changeAmount: changeAmount, item: item);
               },
             )
           : const Center(
