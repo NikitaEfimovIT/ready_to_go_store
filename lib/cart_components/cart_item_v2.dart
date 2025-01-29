@@ -20,10 +20,19 @@ class CartItemNew extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            "lib/assets/loading.gif",
+          FadeInImage.assetNetwork(
+            image: item.productIcon,
+            fit: BoxFit.cover,
             height: 64,
-            width: 64,
+            imageErrorBuilder: (BuildContext context, Object exception,
+                StackTrace? stackTrace) {
+              return FadeInImage.assetNetwork(
+                  placeholder: 'lib/assets/loading.gif',
+                  height: 64,
+                  fit: BoxFit.contain,
+                  image:
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png");
+            }, placeholder: 'lib/assets/loading.gif',
           ),
           ConstrainedBox(
             constraints: BoxConstraints(maxWidth: 157),
