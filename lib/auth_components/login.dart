@@ -33,23 +33,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     Positioned(
-                      top: 40,
-                      left: 20,
-                      right: 20,
+                      top: 60, // Поднял логотип и текст чуть выше
+                      left: 10,
+                      right: 10,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset(
                             "lib/assets/logo.png",
-                            width: 220,
-                            height: 70,
+                            width: 240,
+                            height: 80,
                             fit: BoxFit.contain,
                           ),
                           SizedBox(height: 5),
                           Text(
                             "ReadyToGet Store",
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 22,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFFE14908),
                             ),
@@ -63,10 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
               Expanded(
                 flex: 3,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  padding: EdgeInsets.symmetric(horizontal: 36),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Сильно подняли текстовые поля выше кнопки
+                      SizedBox(height: 10),
                       Text(
                         "Login",
                         style: TextStyle(
@@ -75,12 +77,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      SizedBox(height: 5),
                       Text(
                         "Hello there, welcome back",
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 12),
                       TextFormField(
                         controller: _usernameController,
                         decoration: InputDecoration(
@@ -103,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           errorStyle: TextStyle(
                             color: Colors.white,
-                            fontStyle: FontStyle.italic, // ✅ Ошибка курсивом
+                            fontStyle: FontStyle.italic,
                           ),
                         ),
                         style: TextStyle(color: Colors.white),
@@ -114,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 8),
                       TextFormField(
                         controller: _passwordController,
                         decoration: InputDecoration(
@@ -137,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           errorStyle: TextStyle(
                             color: Colors.white,
-                            fontStyle: FontStyle.italic, // ✅ Ошибка курсивом
+                            fontStyle: FontStyle.italic,
                           ),
                         ),
                         obscureText: true,
@@ -152,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 8),
                       GestureDetector(
                         onTap: () {
                           setState(() {
@@ -252,7 +254,7 @@ class CustomShape extends CustomClipper<Path> {
     path.lineTo(size.width * 0.8, size.height * heightCoefficient);
 
     path.quadraticBezierTo(
-        size.width * 0.98, size.height * heightCoefficient, size.width, size.height * (heightCoefficient+0.20));
+        size.width * 0.98, size.height * heightCoefficient, size.width, size.height * (heightCoefficient + 0.20));
 
     path.lineTo(size.width, 0);
     path.close();
