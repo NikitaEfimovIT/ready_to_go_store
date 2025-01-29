@@ -7,6 +7,7 @@ import 'Product.dart';
 
 var apiUrl = "https://mad-shop.onrender.com/api";
 
+
 class AppState extends ChangeNotifier {
   //TODO User state
   //TODO Order state
@@ -65,9 +66,14 @@ class AppState extends ChangeNotifier {
     //       'https://dummyjson.com/products/search?q=$_searchQuery'));
     // }
 
-    response = await http.get(Uri.parse('$apiUrl/products'));
+    if(_searchQuery==null) {
+      response = await http.get(Uri.parse('$apiUrl/products?populate=*&pagination[page]=$pageNum&pagination[pageSize]=$_pageSize'));
 
-    print(response.statusCode);
+    }else{
+      response = await http.get(Uri.parse('$apiUrl/products?populate=*&filters[name][\$contains]=$_searchQuery'));
+
+    }
+
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       print(body);

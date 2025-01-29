@@ -29,10 +29,19 @@ void showProductModal(BuildContext context, Product product) {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.network(
-                          product.img,
+                        FadeInImage.assetNetwork(
+                          image: product.img,
                           fit: BoxFit.cover,
                           width: 130,
+                          imageErrorBuilder: (BuildContext context, Object exception,
+                              StackTrace? stackTrace) {
+                            return FadeInImage.assetNetwork(
+                                placeholder: 'lib/assets/loading.gif',
+                                height: 130,
+                                fit: BoxFit.contain,
+                                image:
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png");
+                          }, placeholder: 'lib/assets/loading.gif',
                         ),
                         IconButton(
                           icon: Icon(Icons.close),
