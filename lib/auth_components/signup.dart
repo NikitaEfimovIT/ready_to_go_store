@@ -15,27 +15,33 @@ class SignUpScreen extends StatelessWidget {
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 60),
-              Image.asset("lib/assets/logo.png", width: 250, height: 80),
+              Image.asset(
+                "lib/assets/logo.png",
+                width: 240,
+                height: 80,
+                fit: BoxFit.contain,
+              ),
               SizedBox(height: 10),
               Text(
                 "ReadyToGet Store",
                 style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 40,
+                  fontWeight: FontWeight.normal,
                   color: Color(0xFFE14908),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 40),
               Text(
                 "Sign up",
                 style: TextStyle(fontSize: 36, fontWeight: FontWeight.w900),
               ),
               SizedBox(height: 5),
               Text("Sign up to continue", style: TextStyle(fontSize: 16)),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
               TextFormField(
                 controller: _firstNameController,
                 decoration: InputDecoration(labelText: "First Name"),
@@ -46,6 +52,8 @@ class SignUpScreen extends StatelessWidget {
                   return null;
                 },
               ),
+              SizedBox(height: 20),
+
               TextFormField(
                 controller: _lastNameController,
                 decoration: InputDecoration(labelText: "Last Name"),
@@ -56,6 +64,8 @@ class SignUpScreen extends StatelessWidget {
                   return null;
                 },
               ),
+              SizedBox(height: 20),
+
               TextFormField(
                 controller: _emailController,
                 decoration: InputDecoration(labelText: "Email"),
@@ -66,6 +76,8 @@ class SignUpScreen extends StatelessWidget {
                   return null;
                 },
               ),
+              SizedBox(height: 20),
+
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(labelText: "Create Password"),
@@ -77,7 +89,7 @@ class SignUpScreen extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 60),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
