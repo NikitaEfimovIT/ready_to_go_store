@@ -4,6 +4,7 @@ import 'package:ready_to_go_store/home_page.dart';
 import 'package:ready_to_go_store/models/app_state.dart';
 
 import 'cart_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         },
       title: 'Flutter Demo',
       theme: ThemeData(
-
+        textTheme: GoogleFonts.montserratTextTheme(),
         colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.orange,
             primary: Colors.black,

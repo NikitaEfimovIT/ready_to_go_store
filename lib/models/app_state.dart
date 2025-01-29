@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'Product.dart';
 
+var apiUrl = "https://mad-shop.onrender.com/api";
+
+
 class AppState extends ChangeNotifier {
   //TODO User state
   //TODO Order state
@@ -47,26 +50,35 @@ class AppState extends ChangeNotifier {
 
   Future<List<Product>> getProductsFromTheServer(num pageNum) async {
     http.Response response;
+    // if(_searchQuery==null) {
+    //   response = await http
+    //       .get(Uri.parse(
+    //       'https://dummyjson.com/products?skip=$pageNum&limit=$_pageSize'));
+    // }
+    // else if(selectedCategories.isNotEmpty){
+    //   response = await http
+    //       .get(Uri.parse(
+    //       'https://dummyjson.com/products/category/${selectedCategories[0]}'));
+    // }
+    // else{
+    //   response = await http
+    //       .get(Uri.parse(
+    //       'https://dummyjson.com/products/search?q=$_searchQuery'));
+    // }
+
     if(_searchQuery==null) {
-      response = await http
-          .get(Uri.parse(
-          'https://dummyjson.com/products?skip=$pageNum&limit=$_pageSize'));
-    }
-    else if(selectedCategories.isNotEmpty){
-      response = await http
-          .get(Uri.parse(
-          'https://dummyjson.com/products/category/${selectedCategories[0]}'));
-    }
-    else{
-      response = await http
-          .get(Uri.parse(
-          'https://dummyjson.com/products/search?q=$_searchQuery'));
+      response = await http.get(Uri.parse('$apiUrl/products?populate=*&pagination[page]=$pageNum&pagination[pageSize]=$_pageSize'));
+
+    }else{
+      response = await http.get(Uri.parse('$apiUrl/products?populate=*&filters[name][\$contains]=$_searchQuery'));
+
     }
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
+      print(body);
 
-      return body["products"].map<Product>((e)=>Product.fromJson(e)).toList();
+      return body["data"].map<Product>((e)=>Product.fromJson(e)).toList();
     } else {
 
       throw Exception('Failed to load products');
