@@ -40,7 +40,17 @@ class ProductCard extends StatelessWidget {
                 image: imageUrl,
                 height: 142,
                 width: double.infinity,
-                fit: BoxFit.contain),
+                fit: BoxFit.contain,
+                imageErrorBuilder: (BuildContext context, Object exception,
+                    StackTrace? stackTrace) {
+                  return FadeInImage.assetNetwork(
+                      placeholder: 'lib/assets/loading.gif',
+                      height: 142,
+                      width: double.infinity,
+                      fit: BoxFit.contain,
+                      image:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png");
+                }),
           ),
           Padding(
             padding: const EdgeInsets.all(0.0),
