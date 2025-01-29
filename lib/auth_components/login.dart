@@ -9,13 +9,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _rememberMe = false; // Состояние для "Remember me"
+  bool _rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(0xFFD84C22),
+        color: Color(0xFFE14908),
         child: Form(
           key: _formKey,
           child: Column(
@@ -25,16 +25,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 flex: 2,
                 child: Stack(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFFFFFF),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(80),
-                        ),
+                    ClipPath(
+                      clipper: CustomShape(),
+                      child: Container(
+                        color: Colors.white,
+                        height: double.infinity,
                       ),
                     ),
                     Positioned(
-                      top: 60,
+                      top: 40,
                       left: 20,
                       right: 20,
                       child: Column(
@@ -42,17 +41,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Image.asset(
                             "lib/assets/logo.png",
-                            width: 250,
-                            height: 80,
+                            width: 220,
+                            height: 70,
                             fit: BoxFit.contain,
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 5),
                           Text(
                             "ReadyToGet Store",
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFFD84C22),
+                              color: Color(0xFFE14908),
                             ),
                           ),
                         ],
@@ -79,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 8),
                       Text(
                         "Hello there, welcome back",
-                        style: TextStyle(fontSize: 18, color: Colors.white70),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       SizedBox(height: 20),
                       TextFormField(
@@ -87,9 +86,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         decoration: InputDecoration(
                           labelText: "Username",
                           labelStyle: TextStyle(color: Colors.white),
-                          border: UnderlineInputBorder(),
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white70),
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedErrorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          errorStyle: TextStyle(
+                            color: Colors.white,
+                            fontStyle: FontStyle.italic, // ✅ Ошибка курсивом
                           ),
                         ),
                         style: TextStyle(color: Colors.white),
@@ -106,9 +120,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         decoration: InputDecoration(
                           labelText: "Password",
                           labelStyle: TextStyle(color: Colors.white),
-                          border: UnderlineInputBorder(),
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white70),
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedErrorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          errorStyle: TextStyle(
+                            color: Colors.white,
+                            fontStyle: FontStyle.italic, // ✅ Ошибка курсивом
                           ),
                         ),
                         obscureText: true,
@@ -124,23 +153,25 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: _rememberMe,
-                            onChanged: (value) {
-                              setState(() {
-                                _rememberMe = value!;
-                              });
-                            },
-                            checkColor: Colors.black,
-                            fillColor: MaterialStateProperty.all(Colors.white),
-                          ),
-                          Text(
-                            "Remember me",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _rememberMe = !_rememberMe;
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              _rememberMe ? Icons.check_box : Icons.check_box_outline_blank,
+                              color: Colors.white,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              "Remember me",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(height: 20),
                       ElevatedButton(
@@ -154,12 +185,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFFD84C22),
+                            color: Color(0xFFE14908),
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
-                          foregroundColor: Color(0xFFD84C22),
+                          foregroundColor: Color(0xFFE14908),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -185,6 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       fontStyle: FontStyle.italic,
                                       color: Colors.white,
                                       decoration: TextDecoration.underline,
+                                      decorationColor: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -203,4 +235,31 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+class CustomShape extends CustomClipper<Path> {
+  var heightCoefficient = 0.66;
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+
+    path.moveTo(0, 0);
+    path.lineTo(0, size.height * 0.4);
+
+    path.quadraticBezierTo(
+        size.width * 0, size.height * heightCoefficient, size.width * 0.18, size.height * heightCoefficient);
+
+    path.lineTo(size.width * 0.8, size.height * heightCoefficient);
+
+    path.quadraticBezierTo(
+        size.width * 0.98, size.height * heightCoefficient, size.width, size.height * (heightCoefficient+0.20));
+
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
 }

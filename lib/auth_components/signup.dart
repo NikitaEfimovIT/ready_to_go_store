@@ -25,7 +25,7 @@ class SignUpScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFD84C22),
+                  color: Color(0xFFE14908),
                 ),
               ),
               SizedBox(height: 30),
@@ -89,7 +89,7 @@ class SignUpScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFD84C22),
+                  backgroundColor: Color(0xFFE14908),
                   foregroundColor: Colors.white,
                   minimumSize: Size(double.infinity, 55),
                 ),
