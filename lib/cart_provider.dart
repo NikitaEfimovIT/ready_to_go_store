@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ready_to_go_store/models/item.dart';
 import 'package:ready_to_go_store/models/order.dart';
-
 import 'models/price.dart';
 
 class CartProvider with ChangeNotifier {
