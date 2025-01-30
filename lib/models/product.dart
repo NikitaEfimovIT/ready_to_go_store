@@ -27,13 +27,13 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     print("KJHKDJHKJDSS");
-    print(json);
+    print(json['price']['netPrice']);
     return Product(
       id: json['id'].toString(),
       title: json['name'],
       description: json['description'],
       // price: Price(Currency.euro, json['price']),
-      price: Price(Currency.euro, 0),
+      price: Price(Currency.euro, json['price']['netPrice'].toDouble()),
       // category: json["category"],
       category: "",
       img: sourceUrl+json['images'][0]["formats"]["thumbnail"]["url"],
