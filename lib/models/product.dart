@@ -28,6 +28,9 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) {
     print("KJHKDJHKJDSS");
     print(json['price']['netPrice']);
+
+    var image = json['images']!=null? json['images'][0]["formats"]["thumbnail"]["url"] : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png";
+
     return Product(
       id: json['id'].toString(),
       title: json['name'],
@@ -36,8 +39,9 @@ class Product {
       price: Price(Currency.euro, json['price']['netPrice'].toDouble()),
       // category: json["category"],
       category: "",
-      img: sourceUrl+json['images'][0]["formats"]["thumbnail"]["url"],
-      // img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png",
+      img: image,
+      // img: sourceUrl+json['images'][0]["formats"]["thumbnail"]["url"],
+      //  img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png",
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
     );

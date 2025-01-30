@@ -73,6 +73,9 @@ class AppState extends ChangeNotifier {
       response = await http.get(Uri.parse('$apiUrl/products?populate=*&filters[name][\$contains]=$_searchQuery'));
 
     }
+    print(response.statusCode);
+    print(response.body);
+
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
